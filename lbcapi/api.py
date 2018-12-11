@@ -3,7 +3,7 @@ import hashlib
 import hmac as hmac_lib
 import requests
 import time
-import urlparse
+from urllib.parse import urlparse
 
 
 def oauth2(access_token, client_id, client_secret=None, refresh_token=None, expires_at=None, server='https://localbitcoins.com'):
@@ -87,7 +87,7 @@ class Connection():
                 # GET method
                 else:
                     api_request = requests.Request('GET', self.server + url, params=params).prepare()
-                    params_encoded = urlparse.urlparse(api_request.url).query
+                    params_encoded = urlparse(api_request.url).query
 
                 # Calculate signature
                 message = nonce + self.hmac_key + str(url)
